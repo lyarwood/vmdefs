@@ -1,11 +1,11 @@
 resources:
-- baseTypes/c
-- baseTypes/m
-- baseTypes/r
+  #- baseTypes/c
+  #- baseTypes/m
+  #- baseTypes/r
 - small
 - large
 - xlarge
-- basePreferences/linux
+  #- basePreferences/linux
 - rhel9
-- basePreferences/windows
+  #- basePreferences/windows
 - windows10
