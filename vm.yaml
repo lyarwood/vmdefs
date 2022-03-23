@@ -1,0 +1,16 @@
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: my-rhel9
+spec:
+  instanceType:
+    name: c.large
+  domainPreference:
+    name: linux.rhel9
+  volumes:
+  - name: rootfs  # First volume is boot disk by default
+    containerDisk:
+      image: kubevirt/cirros-registry-disk-demo
+  - name: cloudinit
+    cloudInitNoCloud:
+      userDataBase64: SGkuXG4=
