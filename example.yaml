@@ -1,0 +1,205 @@
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceDomainPreferences
+metadata:
+  name: linux
+spec:
+  devices:
+    rng: {}
+  diskDefaults:
+    preferedCDROMBus: virtio
+    preferedDiskBus: virtio
+  terminationGracePeriodSeconds: 180
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceDomainPreferences
+metadata:
+  name: linux.rhel9
+spec:
+  devices:
+    rng: {}
+  diskDefaults:
+    preferedCDROMBus: virtio
+    preferedDiskBus: virtio
+  preferedCpuTopology: sockets
+  terminationGracePeriodSeconds: 180
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceDomainPreferences
+metadata:
+  name: windows
+spec:
+  diskDefaults:
+    preferedCDROMBus: sata
+    preferedDiskBus: sata
+  domain:
+    clock:
+      timer:
+        hpet:
+          present: false
+        hyperv: {}
+        pit:
+          tickPolicy: delay
+        rtc:
+          tickPolicy: catchup
+      utc: {}
+    features:
+      acpi: {}
+      apic: {}
+      hyperv:
+        frequencies: {}
+        ipi: {}
+        reenlightenment: {}
+        relaxed: {}
+        reset: {}
+        runtime: {}
+        spinlocks:
+          spinlocks: 8191
+        synic: {}
+        synictimer:
+          direct: {}
+        tlbflush: {}
+        vapic: {}
+        vpindex: {}
+  terminationGracePeriodSeconds: 300
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceDomainPreferences
+metadata:
+  name: windows.windows10
+spec:
+  diskDefaults:
+    preferedCDROMBus: sata
+    preferedDiskBus: sata
+  domain:
+    clock:
+      timer:
+        hpet:
+          present: false
+        hyperv: {}
+        pit:
+          tickPolicy: delay
+        rtc:
+          tickPolicy: catchup
+      utc: {}
+    features:
+      acpi: {}
+      apic: {}
+      hyperv:
+        frequencies: {}
+        ipi: {}
+        reenlightenment: {}
+        relaxed: {}
+        reset: {}
+        runtime: {}
+        spinlocks:
+          spinlocks: 8191
+        synic: {}
+        synictimer:
+          direct: {}
+        tlbflush: {}
+        vapic: {}
+        vpindex: {}
+  preferedCpuTopology: cores
+  terminationGracePeriodSeconds: 300
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: c
+spec:
+  blockMultiQueue: true
+  cpu:
+    cores: 1
+    dedicatedCpuPlacement: true
+    ioThreadsPolicy: shared
+    isolateEmulatorThread: true
+    numa:
+      guestMappingPassthrough: {}
+  dedicatedIOThread: true
+  memory:
+    guest: 1Gi
+  networkInterfaceMultiQueue: true
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: c.large
+spec:
+  blockMultiQueue: true
+  cpu:
+    cores: 2
+    dedicatedCpuPlacement: true
+    ioThreadsPolicy: shared
+    isolateEmulatorThread: true
+    numa:
+      guestMappingPassthrough: {}
+  dedicatedIOThread: true
+  memory:
+    guest: 4Gi
+  networkInterfaceMultiQueue: true
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: c.small
+spec:
+  blockMultiQueue: true
+  cpu:
+    cores: 1
+    dedicatedCpuPlacement: true
+    ioThreadsPolicy: shared
+    isolateEmulatorThread: true
+    numa:
+      guestMappingPassthrough: {}
+  dedicatedIOThread: true
+  memory:
+    guest: 2Gi
+  networkInterfaceMultiQueue: true
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: m
+spec:
+  cpu:
+    cores: 1
+  memory:
+    guest: 1Gi
+    hugepages:
+      pageSize: 2Mi
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: m.large
+spec:
+  cpu:
+    cores: 2
+  memory:
+    guest: 8Gi
+    hugepages:
+      pageSize: 2Mi
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: r
+spec:
+  cpu:
+    cores: 1
+  dedicatedCpuPlacement: true
+  isolateEmulatorThread: true
+  memory:
+    guest: 1Gi
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: r.large
+spec:
+  cpu:
+    cores: 2
+  dedicatedCpuPlacement: true
+  isolateEmulatorThread: true
+  memory:
+    guest: 16Gi
