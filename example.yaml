@@ -1,4 +1,21 @@
 apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: my-rhel9
+spec:
+  domainPreference:
+    name: linux.rhel9
+  instanceType:
+    name: c.large
+  volumes:
+  - containerDisk:
+      image: kubevirt/cirros-registry-disk-demo
+    name: rootfs
+  - cloudInitNoCloud:
+      userDataBase64: SGkuXG4=
+    name: cloudinit
+---
+apiVersion: kubevirt.io/v1alpha1
 kind: VirtualMachineInstanceDomainPreferences
 metadata:
   name: linux.rhel9
@@ -104,6 +121,18 @@ spec:
   memory:
     guest: 8Gi
   networkInterfaceMultiQueue: true
+---
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: g.xlarge
+spec:
+  cpu:
+    cores: 4
+  gpus:
+  - resourceName: nvidia.com/A400
+  memory:
+    guest: 16Gi
 ---
 apiVersion: kubevirt.io/v1alpha1
 kind: VirtualMachineInstanceType
