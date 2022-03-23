@@ -1,0 +1,9 @@
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceType
+metadata:
+  name: c
+spec:
+  cpu:
+    cores: 4
+  memory:
+    guest: 8Gi
