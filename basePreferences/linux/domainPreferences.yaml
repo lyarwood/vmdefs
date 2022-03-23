@@ -1,0 +1,11 @@
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceDomainPreferences
+metadata:
+  name: linux
+spec:
+  terminationGracePeriodSeconds: 180
+  diskDefaults:
+    preferedDiskBus: virtio
+    preferedCDROMBus: virtio
+  devices:
+    rng: {}

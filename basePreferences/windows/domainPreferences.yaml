@@ -1,0 +1,38 @@
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachineInstanceDomainPreferences
+metadata:
+  name: windows
+spec:
+  terminationGracePeriodSeconds: 300
+  diskDefaults:
+    preferedDiskBus: sata
+    preferedCDROMBus: sata
+  domain:
+    clock:
+      utc: {}
+      timer:
+        hpet:
+          present: false
+        pit:
+          tickPolicy: delay
+        rtc:
+          tickPolicy: catchup
+        hyperv: {}
+    features:
+      acpi: {}
+      apic: {}
+      hyperv:
+        relaxed: {}
+        vapic: {}
+        vpindex: {}
+        spinlocks:
+          spinlocks: 8191
+        synic: {}
+        synictimer:
+          direct: {}
+        tlbflush: {}
+        frequencies: {}
+        reenlightenment: {}
+        ipi: {}
+        runtime: {}
+        reset: {}

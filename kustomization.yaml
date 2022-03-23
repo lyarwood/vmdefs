@@ -1,0 +1,10 @@
+resources:
+- baseTypes/c
+- baseTypes/m
+- baseTypes/r
+- small
+- large
+- basePreferences/linux
+- rhel9
+- basePreferences/windows
+- windows10
