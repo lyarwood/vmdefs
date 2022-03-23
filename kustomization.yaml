@@ -4,3 +4,4 @@ resources:
 - xlarge
 - rhel9
 - windows10
+- vm.yaml
