@@ -5,6 +5,7 @@ resources:
   - ../baseTypes/c
   - ../baseTypes/m
   - ../baseTypes/r
+  - ../baseTypes/g
 
 nameSuffix: .xlarge
 
@@ -18,3 +19,6 @@ patches:
   - path: r.yaml
     target:
       name: r
+  - path: g.yaml
+    target:
+      name: g
