@@ -5,14 +5,11 @@ metadata:
   name: c
 spec:
   cpu:
-    cores: 1
     ioThreadsPolicy: shared
     isolateEmulatorThread: True
     dedicatedCpuPlacement: True
     numa:
       guestMappingPassthrough: {}
-  memory:
-    guest: 1Gi
   networkInterfaceMultiQueue: true
   blockMultiQueue: true
   dedicatedIOThread: true

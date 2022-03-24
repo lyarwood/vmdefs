@@ -4,10 +4,7 @@ kind: VirtualMachineInstanceType
 metadata:
   name: r
 spec:
-  cpu:
-    cores: 1
   memory:
-    guest: 1Gi
     hugepages:
       pageSize: 2Mi
   dedicatedCpuPlacement: True

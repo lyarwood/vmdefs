@@ -4,9 +4,5 @@ kind: VirtualMachineInstanceType
 metadata:
   name: g
 spec:
-  cpu:
-    cores: 1
-  memory:
-    guest: 1Gi
   gpus:
   - resourceName: "nvidia.com/A400"
