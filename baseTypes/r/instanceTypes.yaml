@@ -8,6 +8,8 @@ spec:
     cores: 1
   memory:
     guest: 1Gi
+    hugepages:
+      pageSize: 2Mi
   dedicatedCpuPlacement: True
   isolateEmulatorThread: True
 

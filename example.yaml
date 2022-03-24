@@ -143,8 +143,6 @@ spec:
     cores: 2
   memory:
     guest: 8Gi
-    hugepages:
-      pageSize: 2Mi
 ---
 apiVersion: kubevirt.io/v1alpha1
 kind: VirtualMachineInstanceType
@@ -155,8 +153,6 @@ spec:
     cores: 4
   memory:
     guest: 16Gi
-    hugepages:
-      pageSize: 2Mi
 ---
 apiVersion: kubevirt.io/v1alpha1
 kind: VirtualMachineInstanceType
@@ -169,6 +165,8 @@ spec:
   isolateEmulatorThread: true
   memory:
     guest: 16Gi
+    hugepages:
+      pageSize: 2Mi
 ---
 apiVersion: kubevirt.io/v1alpha1
 kind: VirtualMachineInstanceType
@@ -181,3 +179,5 @@ spec:
   isolateEmulatorThread: true
   memory:
     guest: 32Gi
+    hugepages:
+      pageSize: 2Mi
