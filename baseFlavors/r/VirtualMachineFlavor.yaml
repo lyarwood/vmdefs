@@ -1,0 +1,13 @@
+# https://aws.amazon.com/ec2/instance-types/#Memory_Optimized
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: r
+spec:
+  cpu:
+    guest: 1
+    dedicatedCPUPlacement: True    
+  memory:
+    guest: 1Gi
+    hugepages:
+      pageSize: 2Mi

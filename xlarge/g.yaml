@@ -1,9 +1,9 @@
 apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+kind: VirtualMachineFlavor
 metadata:
   name: g
 spec:
   cpu:
-    cores: 4
+    guest: 4
   memory:
     guest: 16Gi

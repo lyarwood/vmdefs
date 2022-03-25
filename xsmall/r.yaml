@@ -4,6 +4,6 @@ metadata:
   name: r
 spec:
   cpu:
-    guest: 2
+    guest: 1
   memory:
-    guest: 16Gi
+    guest: 512M

@@ -1,12 +1,13 @@
 # https://aws.amazon.com/ec2/instance-types/#Accelerated_Computing
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: g
 spec:
   cpu:
-    cores: 1
+    guest: 1
   memory:
     guest: 1Gi
   gpus:
-  - resourceName: "nvidia.com/A400"
+  - name: "GPU1"
+    deviceName: "nvidia.com/A400"

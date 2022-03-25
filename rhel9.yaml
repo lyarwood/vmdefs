@@ -1,16 +1,21 @@
 apiVersion: kubevirt.io/v1alpha1
 kind: VirtualMachine
 metadata:
-  name: my-rhel9
+  name: rhel9
 spec:
-  instanceType:
+  flavor:
     name: c.large
-  domainPreference:
+    kind: VirtualMachineFlavor
+  preferences:
     name: linux.rhel9
+    kind: VirtualMachinePreference
+  networks:
+    - multus:
+        networkName: private
   volumes:
-  - name: rootfs  # First volume is boot disk by default
+  - name: rootfs
     containerDisk:
-      image: kubevirt/cirros-registry-disk-demo
+      image: kubevirt/rhel9-disk
   - name: cloudinit
     cloudInitNoCloud:
       userDataBase64: SGkuXG4=

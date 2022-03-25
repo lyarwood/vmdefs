@@ -1,7 +1,10 @@
 resources:
+- xsmall
 - small
+- medium
 - large
 - xlarge
+- cirros
+- fedora
 - rhel9
 - windows10
-- vm.yaml

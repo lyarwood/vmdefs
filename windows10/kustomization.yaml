@@ -7,6 +7,6 @@ resources:
 nameSuffix: .windows10
 
 patches:
-  - path: desktop.yaml
+  - path: VirtualMachinePreference.yaml
     target:
       name: windows

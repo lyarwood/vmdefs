@@ -1,0 +1,21 @@
+apiVersion: kubevirt.io/v1alpha1
+kind: VirtualMachine
+metadata:
+  name: windows10
+spec:
+  flavor:
+    name: c.large
+    kind: VirtualMachineFlavor
+  preferences:
+    name: windows.windows10
+    kind: VirtualMachinePreference
+  networks:
+    - multus:
+        networkName: private
+  volumes:
+  - name: rootfs
+    containerDisk:
+      image: kubevirt/windows-disk
+  - name: cloudinit
+    cloudInitNoCloud:
+      userDataBase64: SGkuXG4=

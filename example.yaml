@@ -1,183 +1,272 @@
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachine
-metadata:
-  name: my-rhel9
-spec:
-  domainPreference:
-    name: linux.rhel9
-  instanceType:
-    name: c.large
-  volumes:
-  - containerDisk:
-      image: kubevirt/cirros-registry-disk-demo
-    name: rootfs
-  - cloudInitNoCloud:
-      userDataBase64: SGkuXG4=
-    name: cloudinit
----
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceDomainPreferences
-metadata:
-  name: linux.rhel9
-spec:
-  devices:
-    rng: {}
-  diskDefaults:
-    preferedCDROMBus: virtio
-    preferedDiskBus: virtio
-  preferedCpuTopology: sockets
-  terminationGracePeriodSeconds: 180
----
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceDomainPreferences
-metadata:
-  name: windows.windows10
-spec:
-  diskDefaults:
-    preferedCDROMBus: sata
-    preferedDiskBus: sata
-  domain:
-    clock:
-      timer:
-        hpet:
-          present: false
-        hyperv: {}
-        pit:
-          tickPolicy: delay
-        rtc:
-          tickPolicy: catchup
-      utc: {}
-    features:
-      acpi: {}
-      apic: {}
-      hyperv:
-        frequencies: {}
-        ipi: {}
-        reenlightenment: {}
-        relaxed: {}
-        reset: {}
-        runtime: {}
-        spinlocks:
-          spinlocks: 8191
-        synic: {}
-        synictimer:
-          direct: {}
-        tlbflush: {}
-        vapic: {}
-        vpindex: {}
-  preferedCpuTopology: cores
-  terminationGracePeriodSeconds: 300
----
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: c.large
 spec:
-  blockMultiQueue: true
   cpu:
-    cores: 2
-    dedicatedCpuPlacement: true
-    ioThreadsPolicy: shared
-    isolateEmulatorThread: true
+    dedicatedCPUPlacement: true
+    guest: 2
     numa:
       guestMappingPassthrough: {}
-  dedicatedIOThread: true
   memory:
     guest: 4Gi
-  networkInterfaceMultiQueue: true
 ---
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: c.medium
+spec:
+  cpu:
+    dedicatedCPUPlacement: true
+    guest: 4
+    numa:
+      guestMappingPassthrough: {}
+  memory:
+    guest: 4Gi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: c.small
 spec:
-  blockMultiQueue: true
   cpu:
-    cores: 1
-    dedicatedCpuPlacement: true
-    ioThreadsPolicy: shared
-    isolateEmulatorThread: true
+    dedicatedCPUPlacement: true
+    guest: 1
     numa:
       guestMappingPassthrough: {}
-  dedicatedIOThread: true
   memory:
     guest: 2Gi
-  networkInterfaceMultiQueue: true
 ---
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: c.xlarge
 spec:
-  blockMultiQueue: true
   cpu:
-    cores: 4
-    dedicatedCpuPlacement: true
-    ioThreadsPolicy: shared
-    isolateEmulatorThread: true
+    dedicatedCPUPlacement: true
+    guest: 4
     numa:
       guestMappingPassthrough: {}
-  dedicatedIOThread: true
   memory:
     guest: 8Gi
-  networkInterfaceMultiQueue: true
 ---
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: c.xsmall
+spec:
+  cpu:
+    dedicatedCPUPlacement: true
+    guest: 4
+    numa:
+      guestMappingPassthrough: {}
+  memory:
+    guest: 4Gi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: g.medium
+spec:
+  cpu:
+    guest: 4
+  gpus:
+  - deviceName: nvidia.com/A400
+    name: GPU1
+  memory:
+    guest: 4Gi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: g.xlarge
 spec:
   cpu:
-    cores: 4
+    guest: 4
   gpus:
-  - resourceName: nvidia.com/A400
+  - deviceName: nvidia.com/A400
+    name: GPU1
   memory:
     guest: 16Gi
 ---
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: g.xsmall
+spec:
+  cpu:
+    guest: 4
+  gpus:
+  - deviceName: nvidia.com/A400
+    name: GPU1
+  memory:
+    guest: 4Gi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: m.large
 spec:
   cpu:
-    cores: 2
+    guest: 2
   memory:
     guest: 8Gi
 ---
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: m.medium
+spec:
+  cpu:
+    guest: 4
+  memory:
+    guest: 4Gi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: m.small
+spec:
+  cpu:
+    guest: 2
+  memory:
+    guest: 2Gi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: m.xlarge
 spec:
   cpu:
-    cores: 4
+    guest: 4
   memory:
     guest: 16Gi
 ---
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: m.xsmall
+spec:
+  cpu:
+    guest: 4
+  memory:
+    guest: 4Gi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: r.large
 spec:
   cpu:
-    cores: 2
-  dedicatedCpuPlacement: true
-  isolateEmulatorThread: true
+    dedicatedCPUPlacement: true
+    guest: 2
   memory:
     guest: 16Gi
     hugepages:
       pageSize: 2Mi
 ---
-apiVersion: kubevirt.io/v1alpha1
-kind: VirtualMachineInstanceType
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: r.medium
+spec:
+  cpu:
+    dedicatedCPUPlacement: true
+    guest: 4
+  memory:
+    guest: 4Gi
+    hugepages:
+      pageSize: 2Mi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
 metadata:
   name: r.xlarge
 spec:
   cpu:
-    cores: 4
-  dedicatedCpuPlacement: true
-  isolateEmulatorThread: true
+    dedicatedCPUPlacement: true
+    guest: 4
   memory:
     guest: 32Gi
     hugepages:
       pageSize: 2Mi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachineFlavor
+metadata:
+  name: r.xsmall
+spec:
+  cpu:
+    dedicatedCPUPlacement: true
+    guest: 1
+  memory:
+    guest: 512M
+    hugepages:
+      pageSize: 2Mi
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachinePreference
+metadata:
+  name: linux.cirros
+spec:
+  devices:
+    preferredCdromBus: virtio
+    preferredDiskBus: virtio
+    preferredRng: {}
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachinePreference
+metadata:
+  name: linux.fedora
+spec:
+  devices:
+    preferredCdromBus: virtio
+    preferredDiskBus: virtio
+    preferredRng: {}
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachinePreference
+metadata:
+  name: linux.rhel9
+spec:
+  cpu:
+    preferredCPUTopology: preferCores
+  devices:
+    preferredCdromBus: virtio
+    preferredDiskBus: virtio
+    preferredRng: {}
+---
+apiVersion: flavor.kubevirt.io/v1alpha1
+kind: VirtualMachinePreference
+metadata:
+  name: windows.windows10
+spec:
+  clock:
+    preferredClockOffset:
+      utc: {}
+    preferredTimer:
+      hpet:
+        present: false
+      hyperv: {}
+      pit:
+        tickPolicy: delay
+      rtc:
+        tickPolicy: catchup
+  cpu:
+    preferredCPUTopology: preferSockets
+  devices:
+    preferredDiskBus: sata
+    preferredInterfaceModel: e1000
+    preferredTPM: {}
+  features:
+    preferredAcpi: {}
+    preferredApic: {}
+    preferredHyperv:
+      relaxed: {}
+      spinlocks:
+        spinlocks: 8191
+      vapic: {}
+    preferredSmm: {}
+  firmware:
+    preferredUseEfi: true
+    preferredUseSecureBoot: true

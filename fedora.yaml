@@ -1,0 +1,38 @@
+---
+apiVersion: kubevirt.io/v1
+kind: VirtualMachine
+metadata:
+  labels:
+    kubevirt.io/vm: fedora
+  name: fedora
+spec:
+  flavor:
+    name: m.small
+    kind: VirtualMachineFlavor
+  preference:
+    name: linux.fedora
+    kind: VirtualMachinePreference
+  running: false
+  template:
+    metadata:
+      labels:
+        kubevirt.io/vm: fedora
+    spec:
+      domain:
+        devices:
+          disks:
+          - disk:
+            name: containerdisk
+          - disk:
+            name: cloudinitdisk
+      terminationGracePeriodSeconds: 0
+      volumes:
+      - containerDisk:
+          image: registry:5000/kubevirt/fedora-with-test-tooling-container-disk:devel
+        name: containerdisk
+      - cloudInitNoCloud:
+          userData: |-
+            #cloud-config
+            password: fedora
+            chpasswd: { expire: False }
+        name: cloudinitdisk
