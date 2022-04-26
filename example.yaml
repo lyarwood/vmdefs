@@ -31,7 +31,7 @@ metadata:
 spec:
   cpu:
     dedicatedCPUPlacement: true
-    guest: 1
+    guest: 2
     numa:
       guestMappingPassthrough: {}
   memory:
@@ -57,11 +57,11 @@ metadata:
 spec:
   cpu:
     dedicatedCPUPlacement: true
-    guest: 4
+    guest: 1
     numa:
       guestMappingPassthrough: {}
   memory:
-    guest: 4Gi
+    guest: 512M
 ---
 apiVersion: flavor.kubevirt.io/v1alpha1
 kind: VirtualMachineFlavor
@@ -95,12 +95,12 @@ metadata:
   name: g.xsmall
 spec:
   cpu:
-    guest: 4
+    guest: 1
   gpus:
   - deviceName: nvidia.com/A400
     name: GPU1
   memory:
-    guest: 4Gi
+    guest: 512M
 ---
 apiVersion: flavor.kubevirt.io/v1alpha1
 kind: VirtualMachineFlavor
@@ -148,9 +148,9 @@ metadata:
   name: m.xsmall
 spec:
   cpu:
-    guest: 4
+    guest: 1
   memory:
-    guest: 4Gi
+    guest: 512M
 ---
 apiVersion: flavor.kubevirt.io/v1alpha1
 kind: VirtualMachineFlavor
@@ -207,8 +207,10 @@ spec:
 apiVersion: flavor.kubevirt.io/v1alpha1
 kind: VirtualMachinePreference
 metadata:
-  name: linux.cirros
+  name: linux.centos-stream
 spec:
+  cpu:
+    preferredCPUTopology: preferCores
   devices:
     preferredCdromBus: virtio
     preferredDiskBus: virtio
@@ -223,50 +225,23 @@ spec:
     preferredCdromBus: virtio
     preferredDiskBus: virtio
     preferredRng: {}
+  features:
+    preferredAcpi: {}
+    preferredSmm: {}
+  firmware:
+    preferredUseSecureBoot: true
 ---
 apiVersion: flavor.kubevirt.io/v1alpha1
 kind: VirtualMachinePreference
 metadata:
-  name: linux.rhel9
+  name: linux.ubuntu
 spec:
-  cpu:
-    preferredCPUTopology: preferCores
   devices:
     preferredCdromBus: virtio
     preferredDiskBus: virtio
     preferredRng: {}
----
-apiVersion: flavor.kubevirt.io/v1alpha1
-kind: VirtualMachinePreference
-metadata:
-  name: windows.windows10
-spec:
-  clock:
-    preferredClockOffset:
-      utc: {}
-    preferredTimer:
-      hpet:
-        present: false
-      hyperv: {}
-      pit:
-        tickPolicy: delay
-      rtc:
-        tickPolicy: catchup
-  cpu:
-    preferredCPUTopology: preferSockets
-  devices:
-    preferredDiskBus: sata
-    preferredInterfaceModel: e1000
-    preferredTPM: {}
   features:
     preferredAcpi: {}
-    preferredApic: {}
-    preferredHyperv:
-      relaxed: {}
-      spinlocks:
-        spinlocks: 8191
-      vapic: {}
     preferredSmm: {}
   firmware:
-    preferredUseEfi: true
     preferredUseSecureBoot: true

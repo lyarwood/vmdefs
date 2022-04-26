@@ -3,20 +3,20 @@ apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   labels:
-    kubevirt.io/vm: fedora
-  name: fedora
+    kubevirt.io/vm: ubuntu
+  name: ubuntu
 spec:
   flavor:
     name: m.medium
     kind: VirtualMachineFlavor
   preference:
-    name: linux.fedora
+    name: linux.ubuntu
     kind: VirtualMachinePreference
   running: false
   template:
     metadata:
       labels:
-        kubevirt.io/vm: fedora
+        kubevirt.io/vm: ubuntu
     spec:
       domain:
         devices:
@@ -28,11 +28,11 @@ spec:
       terminationGracePeriodSeconds: 0
       volumes:
       - containerDisk:
-          image: quay.io/containerdisks/fedora:35
+          image: quay.io/containerdisks/ubuntu:22.04
         name: containerdisk
       - cloudInitNoCloud:
           userData: |-
             #cloud-config
-            password: fedora
+            password: ubuntu
             chpasswd: { expire: False }
         name: cloudinitdisk

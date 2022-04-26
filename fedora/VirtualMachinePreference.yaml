@@ -2,3 +2,9 @@ apiVersion: flavor.kubevirt.io/v1alpha1
 kind: VirtualMachinePreference
 metadata:
   name: linux
+spec:
+  features:
+    preferredAcpi: {}
+    preferredSmm: {}
+  firmware:
+    preferredUseSecureBoot: true

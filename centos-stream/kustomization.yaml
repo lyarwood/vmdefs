@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
 - ../basePreferences/linux
 
-nameSuffix: .cirros
+nameSuffix: .centos-stream
 
 patches:
   - path: VirtualMachinePreference.yaml

@@ -4,7 +4,6 @@ resources:
 - medium
 - large
 - xlarge
-- cirros
+- centos-stream
 - fedora
-- rhel9
-- windows10
+- ubuntu

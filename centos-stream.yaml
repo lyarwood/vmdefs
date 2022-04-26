@@ -3,37 +3,36 @@ apiVersion: kubevirt.io/v1
 kind: VirtualMachine
 metadata:
   labels:
-    kubevirt.io/vm: cirros
-  name: cirros
+    kubevirt.io/vm: centos-stream
+  name: centos-stream
 spec:
   flavor:
-    name: m.xsmall
+    name: m.medium
     kind: VirtualMachineFlavor
   preference:
-    name: linux.cirros
+    name: linux.centos-stream
     kind: VirtualMachinePreference
   running: false
   template:
     metadata:
       labels:
-        kubevirt.io/vm: cirros
+        kubevirt.io/vm: centos-stream
     spec:
       domain:
         devices:
           disks:
-          - disk: {}
+          - disk:
             name: containerdisk
           - disk:
             name: cloudinitdisk
-        resources: {}
       terminationGracePeriodSeconds: 0
       volumes:
       - containerDisk:
-          image: registry:5000/kubevirt/cirros-container-disk-demo:devel
+          image: quay.io/containerdisks/centos-stream:9
         name: containerdisk
       - cloudInitNoCloud:
-          userData: |
-            #!/bin/sh
-
-            echo 'printed from cloud-init userdata'
+          userData: |-
+            #cloud-config
+            password: centos-stream
+            chpasswd: { expire: False }
         name: cloudinitdisk

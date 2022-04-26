@@ -1,8 +1,0 @@
-apiVersion: flavor.kubevirt.io/v1alpha1
-kind: VirtualMachinePreferences
-
-metadata:
-  name: windows
-spec:
-  cpu:
-    preferredCPUTopology: preferSockets
